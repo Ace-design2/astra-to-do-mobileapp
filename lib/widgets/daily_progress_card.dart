@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class DailyProgressCard extends StatelessWidget {
   const DailyProgressCard({super.key});
@@ -8,9 +8,10 @@ class DailyProgressCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
       decoration: BoxDecoration(
-        color: const Color(0xFF1E1E1E), // Dark grey card background
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.05), width: 1),
+        color: CupertinoColors.secondarySystemGroupedBackground.resolveFrom(
+          context,
+        ), // iOS grouped background style
+        borderRadius: BorderRadius.circular(20), // Standard iOS corner radius
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,28 +25,26 @@ class DailyProgressCard extends StatelessWidget {
                 children: [
                   const Text(
                     'Daily Progress',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     '5 of 5 tasks completed',
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.white.withValues(alpha: 0.6),
+                      color: CupertinoColors.secondaryLabel.resolveFrom(
+                        context,
+                      ),
                     ),
                   ),
                 ],
               ),
-              const Text(
+              Text(
                 '100%',
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFFE53935), // The exact red used in UI
+                  color: CupertinoTheme.of(context).primaryColor,
                 ),
               ),
             ],
@@ -57,7 +56,7 @@ class DailyProgressCard extends StatelessWidget {
               Container(
                 height: 8,
                 decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.1),
+                  color: CupertinoColors.systemFill.resolveFrom(context),
                   borderRadius: BorderRadius.circular(4),
                 ),
               ),
@@ -66,15 +65,8 @@ class DailyProgressCard extends StatelessWidget {
                 child: Container(
                   height: 8,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFEF5350), // Lighter red for the bar
+                    color: CupertinoTheme.of(context).primaryColor,
                     borderRadius: BorderRadius.circular(4),
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color(0xFFE53935).withValues(alpha: 0.4),
-                        blurRadius: 10,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
                   ),
                 ),
               ),
