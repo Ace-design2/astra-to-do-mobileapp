@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import '../models/task.dart';
+import 'liquid_glass_container.dart';
 
 class TaskItemCard extends StatelessWidget {
   final Task task;
@@ -9,14 +10,10 @@ class TaskItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return LiquidGlassContainer(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-      decoration: BoxDecoration(
-        color: CupertinoColors.secondarySystemGroupedBackground.resolveFrom(
-          context,
-        ),
-        borderRadius: BorderRadius.circular(10),
-      ),
+      borderRadius: 16,
+      padding: EdgeInsets.zero,
       child: CupertinoButton(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         onPressed: onTap,
@@ -44,7 +41,7 @@ class TaskItemCard extends StatelessWidget {
         border: Border.all(
           color: task.isCompleted
               ? CupertinoTheme.of(context).primaryColor
-              : CupertinoColors.tertiaryLabel.resolveFrom(context),
+              : CupertinoColors.white.withAlpha(100),
           width: 1.5,
         ),
       ),
@@ -69,8 +66,8 @@ class TaskItemCard extends StatelessWidget {
             height: 1.3,
             decoration: task.isCompleted ? TextDecoration.lineThrough : null,
             color: task.isCompleted
-                ? CupertinoColors.tertiaryLabel.resolveFrom(context)
-                : CupertinoColors.label.resolveFrom(context),
+                ? CupertinoColors.white.withAlpha(120)
+                : CupertinoColors.white,
           ),
         ),
         if (task.aiTag != null)
@@ -82,7 +79,7 @@ class TaskItemCard extends StatelessWidget {
                   task.aiTag!.split('•')[0].trim(), // "All Day"
                   style: TextStyle(
                     fontSize: 13,
-                    color: CupertinoColors.secondaryLabel.resolveFrom(context),
+                    color: CupertinoColors.white.withAlpha(180),
                   ),
                 ),
                 if (task.aiTag!.contains('•')) ...[
@@ -92,9 +89,7 @@ class TaskItemCard extends StatelessWidget {
                       '•',
                       style: TextStyle(
                         fontSize: 13,
-                        color: CupertinoColors.secondaryLabel.resolveFrom(
-                          context,
-                        ),
+                        color: CupertinoColors.white.withAlpha(180),
                       ),
                     ),
                   ),

@@ -63,70 +63,92 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      backgroundColor: CupertinoColors.systemGroupedBackground,
-      child: CustomScrollView(
-        slivers: [
-          CupertinoSliverNavigationBar(
-            largeTitle: const Text('Good Evening, Ace'),
-            trailing: CupertinoButton(
-              padding: EdgeInsets.zero,
-              child: const Icon(CupertinoIcons.bell),
-              onPressed: () {},
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16.0,
-                vertical: 16.0,
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xFF1E0A10), // Deep red/black
+            Color(0xFF0A0A1E), // Deep blue/black
+            Color(0xFF140510), // Deep purple/black
+          ],
+          stops: [0.0, 0.5, 1.0],
+        ),
+      ),
+      child: CupertinoPageScaffold(
+        backgroundColor: CupertinoColors.transparent,
+        child: CustomScrollView(
+          slivers: [
+            CupertinoSliverNavigationBar(
+              backgroundColor: CupertinoColors.transparent,
+              border: null,
+              largeTitle: const Text(
+                'Good Evening, Ace',
+                style: TextStyle(color: CupertinoColors.white),
               ),
-              child: Text(
-                "Let's make today productive.",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: CupertinoColors.secondaryLabel.resolveFrom(context),
+              trailing: CupertinoButton(
+                padding: EdgeInsets.zero,
+                child: const Icon(
+                  CupertinoIcons.bell,
+                  color: CupertinoColors.white,
+                ),
+                onPressed: () {},
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 16.0,
+                ),
+                child: Text(
+                  "Let's make today productive.",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: CupertinoColors.white.withAlpha(180),
+                  ),
                 ),
               ),
             ),
-          ),
-          const SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              child: DailyProgressCard(),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(
-                left: 16.0,
-                top: 24.0,
-                bottom: 8.0,
+            const SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                child: DailyProgressCard(),
               ),
-              child: Text(
-                'YOUR TASKS',
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600,
-                  color: CupertinoColors.secondaryLabel.resolveFrom(context),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: 16.0,
+                  top: 24.0,
+                  bottom: 8.0,
+                ),
+                child: Text(
+                  'YOUR TASKS',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: CupertinoColors.white.withAlpha(150),
+                  ),
                 ),
               ),
             ),
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate((context, index) {
-              final task = _tasks[index];
-              return TaskItemCard(
-                key: ValueKey(task.id),
-                task: task,
-                onTap: () => _toggleTaskCompletion(task.id),
-              );
-            }, childCount: _tasks.length),
-          ),
-          const SliverPadding(
-            padding: EdgeInsets.only(bottom: 100),
-          ), // Space for tab bar
-        ],
+            SliverList(
+              delegate: SliverChildBuilderDelegate((context, index) {
+                final task = _tasks[index];
+                return TaskItemCard(
+                  key: ValueKey(task.id),
+                  task: task,
+                  onTap: () => _toggleTaskCompletion(task.id),
+                );
+              }, childCount: _tasks.length),
+            ),
+            const SliverPadding(
+              padding: EdgeInsets.only(bottom: 100),
+            ), // Space for tab bar
+          ],
+        ),
       ),
     );
   }
