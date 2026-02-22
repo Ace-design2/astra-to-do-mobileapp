@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: CustomScrollView(
           slivers: [
             CupertinoSliverNavigationBar(
-              backgroundColor: CupertinoColors.transparent,
+              backgroundColor: CupertinoColors.black.withValues(alpha: 0.4),
               border: null,
               largeTitle: const Text(
                 'Good Evening, Ace',
